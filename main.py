@@ -24,6 +24,7 @@ birthdays_dict = {(data_row["month"], data_row["day"]) : data_row for (index, da
 
 if today_tuple in birthdays_dict:
     birthday_person = birthdays_dict[today_tuple]
+    print(f"Today is {birthday_person['name']}'s birthday! Sending email...")
     file_path = f"letter_templates/letter_{random.randint(1, 3)}.txt"
     with open(file_path) as letter_file:
         contents = letter_file.read()
@@ -37,3 +38,7 @@ if today_tuple in birthdays_dict:
             to_addrs=birthday_person["email"],
             msg=f"Subject:Happy Birthday!\n\n{contents}"
         )
+        print("Birthday email sent successfully!")
+
+else:
+    print(f"No birthdays found for {today_tuple}.")
